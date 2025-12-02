@@ -100,7 +100,7 @@ The final design, programmed into the Basys 3 board, drives a monitor via the VG
 
 ## Challenges & Lessons Learned
 
-The most challenging part of the project was mastering timing for smooth animation and resets, along with learning to use registers correctly for switch-controlled behavior. Ensuring synthesis and implemented hardware matched the simulated design required several iterations, especially to fine-tune counter widths and handle wraparound conditions. The project reinforced best practices for modular, well-documented HDL and design for testability.
+The most challenging part of the project was mastering timing for smooth animation and resets, along with learning to use registers correctly for switch-controlled behavior. Ensuring synthesis and implemented hardware matched the simulated design required several iterations, especially to fine-tune counter widths and handle wraparound conditions. a challenge that i did not overcome is the switch implementation, i tried using hardware friendly code like using shifts instead of devisions in my shift change section. i cannot run a behavioral simulation to help me
 
 ---
 
