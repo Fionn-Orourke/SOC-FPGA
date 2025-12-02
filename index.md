@@ -98,7 +98,7 @@ During synthesis, I paid to warning messages about timing, as the animation reli
 
 The final design, programmed into the Basys 3 board, drives a monitor via the VGA output. Switches S0—S3 can be toggled live to reverse direction, change speed, and apply different color effects.  
 
-
+<img src="https://github.com/Fionn-Orourke/SOC-FPGA/blob/main/docs/assets/images/VID_20251202_153641131.gif">
 ---
 
 ## Challenges & Lessons Learned
