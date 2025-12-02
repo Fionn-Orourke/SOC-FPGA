@@ -64,9 +64,12 @@ The core of the moving flag logic is handled in the `ColourStripes` Verilog modu
   The four onboard switches (`sw[3:0]`) control multiple display properties:
     - Speed and direction of flag movement
     - change of flag
+    <img src="https://github.com/Fionn-Orourke/SOC-FPGA/blob/main/docs/assets/images/IMG_20251202_145443799_MFNR.jpg">
 
 - **Pulsing Effect:**  
   The width of each colored stripe pulses over time, further enhancing the visual interest.
+  i began implimenting the pulsing effect with the template code. It was very fast and timing wasnt good but the first movement was a good milestone.
+  <img src ="https://github.com/Fionn-Orourke/SOC-FPGA/blob/main/docs/assets/images/VID_20251111_143014980%20(1).gif">
 
 ```verilog
 reg [COUNTER_WIDTH-1:0] count;
