@@ -27,6 +27,8 @@ The project was developed in Vivado 2025.1 using the Basys3_Master.xdc constrain
 The given colour stripes code template handled basic VGA timing, producing fixed-color stripes on the VGA monitor. The templates provided a clear separation between timing generation (sync signals, row and column counting) and the color logic, which allowed for easy experimentation with various display effects.  
 The VGA interface operates by outputting color information for each pixel at just the right time, synchronized with horizontal and vertical sync pulses. This requirement for precise timing was a critical factor when introducing animation to the design. I began by changing some parts in the template code to see what it would affect.
 <img src= "https://github.com/Fionn-Orourke/SOC-FPGA/blob/main/docs/assets/images/IMG_20251111_140907759_MFNR.jpg">
+after understanding the code i changed it to fit the dimensions of the irish flag.
+<img src= "https://github.com/Fionn-Orourke/SOC-FPGA/blob/main/docs/assets/images/IMG_20251125_152630832_MFNR.jpg">
 
 
 ### Simulation
