@@ -9,7 +9,7 @@ categories: demo
 
 ## Project Overview
 
-This project demonstrates a dynamic and interactive VGA display on the Basys 3 (Artix 7) FPGA board using Vivado 2025.1. The design renders moving flag patterns on a monitor, with the animation and color modes controlled by the board’s onboard switches. The primary goal was to explore the complexity and richness that movement and user interaction can bring to otherwise simple static visual designs. The intended audience is academic, primarily lecturers evaluating project work.
+This project demonstrates a dynamic and interactive VGA display on the Basys 3 (Artix 7) FPGA board using Vivado 2025.1. The design renders moving flag patterns on a monitor, with the animation and color modes controlled by the board’s onboard switches. The primary goal was impliment movement and user interaction. The user interraction doesn't work correctly.
 
 ---
 
@@ -22,14 +22,14 @@ The project was developed in Vivado 2025.1 using the Basys3_Master.xdc constrain
 
 ### Template Code
 
-The given Verilog code templates handled basic VGA timing, producing fixed-color stripes on the VGA monitor. The templates provided a clear separation between timing generation (sync signals, row and column counting) and the color logic, which allowed for easy experimentation with various display effects.  
+The given colour stripes code template handled basic VGA timing, producing fixed-color stripes on the VGA monitor. The templates provided a clear separation between timing generation (sync signals, row and column counting) and the color logic, which allowed for easy experimentation with various display effects.  
 The VGA interface operates by outputting color information for each pixel at just the right time, synchronized with horizontal and vertical sync pulses. This requirement for precise timing was a critical factor when introducing animation to the design.  
-*(Consider inserting a screenshot showing the template code or waveform)*
+
 
 ### Simulation
 
 Simulation was performed using Vivado’s built-in tools, allowing verification of both the VGA timing generation and static image output before moving to more complex behaviour. Key signals such as row/column counts, and color outputs were examined for correctness.  
-*(Insert a simulation waveform image if available)*
+(i cannot show a simulation waveform as each time i attempt to run behavioral simulation Vivado crashes)
 
 ### Synthesis
 
@@ -45,7 +45,7 @@ The unmodified template demo produced stable, static color stripes on the displa
 
 ## My VGA Design Edit
 
-I extended the template to create a moving flag effect, adding user-interaction via the board switches to control movement speed, direction, and color effects. This added a layer of complexity, requiring careful handling of animation timing and user input synchronization. Online references such as [FPGA4student’s VGA FPGA tutorials](https://www.fpga4student.com/) provided valuable guidance.
+I extended the template to create a moving flag effect, adding user-interaction via the board switches to control movement speed, direction, and color effects. This added a layer of complexity, requiring careful handling of animation timing and user input synchronization. Online references such as [FPGA4student’s VGA FPGA tutorials](https://www.fpga4student.com/) provided guidance.
 
 ### Code Adaptation
 
@@ -53,16 +53,18 @@ The core of the moving flag logic is handled in the `ColourStripes` Verilog modu
 
 - **Animated Movement:**  
   A counter (`count`) is used to create animated horizontal movement of the flag pattern across the screen. The position shift is controlled by incrementing or resetting the counter based on the clock and reset input.
-- **User Interaction:**  
+  ```wire [10:0] width = 200 + count[28:22];
+  ```
+  count[28:22] is a small (7-bit) number that smoothly increases as the main counter goes up.
+  By adding this to 200, the stripe width value slowly grows and shrinks, creating a breathing or pulsing effect where stripes get thicker and thinner, repeatedly, all by themselves.
+- **User Interaction:(unfinnished)**  
   The four onboard switches (`sw[3:0]`) control multiple display properties:
     - Speed and direction of flag movement
-    - Color inversion and special color effects
-- **Modular Design:**  
-  The `row` and `col` pixel coordinates from the VGA driver are processed with the current shift and width values, driving the displayed color based on zone and switch inputs.
+    - change of flag
+
 - **Pulsing Effect:**  
   The width of each colored stripe pulses over time, further enhancing the visual interest.
 
-*Example core logic from the design:*
 ```verilog
 reg [COUNTER_WIDTH-1:0] count;
 always @(posedge clk or posedge rst) begin
@@ -82,17 +84,17 @@ end
 
 ### Simulation
 
-Simulation focused on validating the animated movement and the effects of switch toggling. It was useful to plot both the counter, color outputs, and switch inputs on the same waveform, watching for glitches or incorrect wraparound behavior. The main challenge in simulation was to ensure timing correctness with changing movement speeds.  
-*(Include a relevant simulation screenshot if you have one)*
+Simulation focused on validating the animated movement and the effects of switch toggling. It was useful to plot both the counter, color outputs, and switch inputs on the same waveform, watching for glitches or incorrect wraparound behavior. The main challenge in simulation was to ensure timing correctness with changing movement speeds. This is where i identified that my switches werent working.  
+(the simulation has stopped working)
 
 ### Synthesis
 
-During synthesis, attention was paid to warning messages about timing, as the animation relied on correct clock division and register use. No significant errors arose, but tweaking the counter width and timing constants was necessary to achieve smooth on-screen animation. The implemented design downloaded smoothly to the Basys3 with correct pin mappings, thanks to the provided constraints.
+During synthesis, I paid to warning messages about timing, as the animation relied on correct clock division and register use. No significant errors arose, but tweaking the counter width and timing constants was necessary to achieve smooth on-screen animation. The implemented design downloaded smoothly to the Basys3 with correct pin mappings.
   
 ### Demonstration
 
 The final design, programmed into the Basys 3 board, drives a monitor via the VGA output. Switches S0—S3 can be toggled live to reverse direction, change speed, and apply different color effects.  
-*(Include a photo or GIF or link to your video demonstration)*
+
 
 ---
 
