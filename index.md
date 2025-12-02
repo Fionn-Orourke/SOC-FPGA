@@ -12,6 +12,8 @@ categories: demo
 This project demonstrates a dynamic and interactive VGA display on the Basys 3 (Artix 7) FPGA board using Vivado 2025.1. The design renders moving flag patterns on a monitor, with the animation and color modes controlled by the board’s onboard switches. The primary goal was impliment movement and user interaction. The user interraction doesn't work correctly.
 
 ---
+##Project summary
+<img src="https://raw.githubusercontent.com/Fionn-Orourke/SOC-FPGA/main/docs/assets/images/proj summary.png">
 
 ## Template VGA Design
 
